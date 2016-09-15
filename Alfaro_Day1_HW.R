@@ -37,3 +37,13 @@ for(ii in 1:length(years)){
     cat(years[ii], 'Hooray, presidential elections!', sep = '\t', fill = T)
   }
 }
+
+
+bankAccounts <- c(10, 9.2, 5.6, 3.7, 8.8, 0.5)
+interestRate <- 0.0125
+compounded <- rep (NA,length(bankAccounts))
+for (i in 1:length(bankAccounts)){
+  compounded[i] <- interestRate*bankAccounts[i] + bankAccounts[i]
+}
+compounded
+
