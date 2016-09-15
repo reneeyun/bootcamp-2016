@@ -47,3 +47,20 @@ for (i in 1:length(bankAccounts)){
 }
 compounded
 
+
+bankAccounts <- c(10, 9.2, 5.6)
+interestRate <- 0.0525
+house <- c(4.8, 3.8, 5.7)
+food<- c(3.5, 4.3, 5.0)
+fun <- c(7.8, 2.1, 10.5)
+income <- c(21, 21, 21)
+for (j in 1:5){
+for (i in 1:length(bankAccounts)){
+  bankAccounts[i] <- (bankAccounts[i] - (house[i] + food[i] +fun[i])) + income[i]
+}
+  for (i in 1:length(bankAccounts)){
+    bankAccounts[i] <- interestRate*bankAccounts[i] + bankAccounts[i]}
+}
+bankAccounts
+
+
