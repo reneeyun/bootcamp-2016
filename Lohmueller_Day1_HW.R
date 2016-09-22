@@ -22,7 +22,7 @@ for(i in 1:1000){
 }
 
 #Question 6
-bins <- seq(from=65, to=73, by=1)
+bins <- seq(from=65, to=73, by=0.5)
 hist(mean_heights_100, breaks=bins)$breaks
 hist(mean_heights_1000, breaks=bins)$breaks
 
@@ -31,6 +31,9 @@ counts_1000 <-hist(mean_heights_1000, breaks=bins)$counts
 
 windows()
 barplot(rbind(counts_100, counts_1000),
-        col=c(2,4), beside=TRUE, names.arg=seq(from=65, to=72, by=1),
+        col=c(2,4), beside=TRUE, names.arg=seq(from=65, to=72.5, by=0.5), #count using the bins we set, we will need 16 names
         xlab="Average height (inches)", ylab="Count", main= "Average Height of a Population of n Living in LA",
-        las=1)
+        las=1, cex.lab=1.2)
+legend("topleft", c("n=100", "n=1000"), col=c(2,4), lwd=4)
+
+
