@@ -1,12 +1,14 @@
 getwd()
+setwd("C:\\Users\\renee\\Documents\\GitHub\\bootcamp-2016")
 
-snpsDataFrame=read.table('hapmap_CEU_r23a_chr2_ld.txt',header=TRUE)
+##Question 1 Part a
+snpsDataFrame=read.table('hapmap_CEU_r23a_chr2_ld.txt',header=TRUE) #puts into environment
 phenoDataFrame=read.table("pheno.sim.2014-1.txt", header=TRUE)
 
-snps=as.matrix(snpsDataFrame)
+snps=as.matrix(snpsDataFrame) ##Convert dataframe to matrix
 pheno=as.matrix(phenoDataFrame)
 
-compute_chisquare_2=function(x){
+compute_chisquare=function(x){ ##create a function
   freq=sum(x,na.rm=TRUE)/(2.0*sum(!is.na(x)))
   cnt0=sum(x==0,na.rm=TRUE)
   cnt1=sum(x==1,na.rm=TRUE)
@@ -17,4 +19,30 @@ compute_chisquare_2=function(x){
   chisq<-chisq.test(obscnts,p=exp_probs, correct = FALSE)$statistic
   return(chisq)
 }
+
+chisqs= apply(snps,1,compute_chisquare)
+
+pvals=pchisq(chisqs,1,lower.tail=FALSE)
+
+#Part b
+signifthres <- 0.05
+sum(pvals<signifthres)
+length(pvals)
+sum(pvals<signifthres)/(length(pvals)) ##proportion of pvals that are <0.05 is 0.04509218
+
+signifthres <- 0.01
+sum(pvals<signifthres)/(length(pvals)) ##proportion of pvals that are <0.05 is 0.01021425
+
+signifthres <- 0.001
+sum(pvals<signifthres)/(length(pvals)) ##proportion of pvals that are <0.05 is 0.00124564
+
+#Part c
+num_pval <- length(pvals) ##4014 SNPs
+
+#Part d
+exp_pvals <- (seq(1,num_pval,by=1))/num_pval ##numerator goes from 1 to num_pval (which is 4014), denominator stays same
+
+
+
+
 
